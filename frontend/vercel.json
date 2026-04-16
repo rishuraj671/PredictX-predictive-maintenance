@@ -1,5 +1,5 @@
 {
   "env": {
-    "NEXT_PUBLIC_API_BASE_URL": "https://<your-username>-predictx-api.hf.space"
+    "NEXT_PUBLIC_API_BASE_URL": "https://rishuraj4-predictx-api.hf.space"
   }
 }

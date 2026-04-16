@@ -1,0 +1,43 @@
+name: pred-maint
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - pandas>=2.0.0
+  - numpy>=1.24.0
+  - scikit-learn>=1.3.0
+  - matplotlib
+  - seaborn
+  - jupyter
+  - psycopg2
+  - sqlalchemy
+  - pip:
+    - plotly
+    - streamlit
+    - streamlit-aggrid
+    - fastapi
+    - uvicorn
+    - kafka-python
+    - confluent-kafka
+    - pyod
+    - torch
+    - pytorch-lightning
+    - prophet
+    - pulp
+    - mlflow>=2.10.0
+    - kserve
+    - seldon-core
+    - prometheus-client
+    - evidently
+    - sentry-sdk
+    - locust
+    - faker
+    - great_expectations
+    - pytest
+    - ruff
+    - black
+    - optuna
+    - redis
+    - feast

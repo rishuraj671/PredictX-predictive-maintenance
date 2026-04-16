@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cmapss-dashboard
+  namespace: pred-maint
+  labels:
+    app: cmapss-dashboard
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cmapss-dashboard
+  template:
+    metadata:
+      labels:
+        app: cmapss-dashboard
+    spec:
+      containers:
+      - name: streamlit
+        image: your-registry/cmapss-dashboard:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8501
+        resources:
+          requests:
+            cpu: "250m"
+            memory: "512Mi"
+          limits:
+            cpu: "500m"
+            memory: "1Gi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cmapss-dashboard-svc
+  namespace: pred-maint
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8501
+    protocol: TCP
+  selector:
+    app: cmapss-dashboard
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: cmapss-dashboard-hpa
+  namespace: pred-maint
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: cmapss-dashboard
+  minReplicas: 2
+  maxReplicas: 5
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
